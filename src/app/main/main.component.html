@@ -1,0 +1,18 @@
+<div class="container">
+    
+    <div class="forms">
+        <h1>Calculateur des Émissions de Gaz à Effet de Serre des Stations d'Épuration</h1>
+        <app-scope1 (scope1Calculated)="handleScope1Result($event)"></app-scope1>
+        <app-scope2 (scope2Calculated)="handleScope2Result($event)"></app-scope2>
+        <app-scope3 (scope3Calculated)="handleScope3Result($event)"></app-scope3>
+    </div>
+
+    <div class="result">
+        <h2>Résultats</h2>
+        <p>Scope 1: {{scope1Result}} tonnes CO2e</p>
+        <p>Scope 2: {{scope2Result}} tonnes CO2e</p>
+        <p>Scope 3: {{scope3Result}} tonnes CO2e</p>
+        <p>Total: {{totalResult}} tonnes CO2e</p>
+    </div>
+</div>
+  
