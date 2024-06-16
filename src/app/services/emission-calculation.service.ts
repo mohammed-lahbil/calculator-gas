@@ -7,13 +7,6 @@ export class EmissionCalculationService {
   private emissionFactors = {
     fuel: 0.24,
     electricity: 0.712,
-    transport: {
-      general: 2.518,
-      truck: {
-        tanker: 33,
-        dumper: 34
-      }
-    },
     chemicals: {
       chlorureFerrique: 322,
       polymere: 805,
@@ -21,9 +14,14 @@ export class EmissionCalculationService {
       chlore: 740
     },
     gwp: {
-      fugitive: 1.43,
+      fugitive: 1430,
+      fe: 0.18,
       ch4: 25
     },
+    camions: {
+      camionVenneBasculante: { consumption: 34, emissionFactor: 2.518},
+      camionCiterne: { consumption: 33, emissionFactor: 2.518}
+    } as { [key: string]: { consumption: number; emissionFactor: number } },
     cars: {
       daciaSandero: { consumption: 0.12, emissionFactor: 2.518 },
       daciaLogan: { consumption: 0.13, emissionFactor: 2.518 },
@@ -37,38 +35,46 @@ export class EmissionCalculationService {
 
   calculateScope1(fuelConsumption: number, daysActive: number, fugitiveEmissions: number, ch4Emissions: number): number {
     const { fuel, gwp } = this.emissionFactors;
-    const fuelEmissions = fuelConsumption * fuel / 1_000;
-    const fugitiveEmissionsTotal = fugitiveEmissions * gwp.fugitive / 1_000;
-    const ch4EmissionsTotal = ch4Emissions * gwp.ch4 / 1_000;
+    const fuelEmissions = fuelConsumption * fuel / 1000;
+    const fugitiveEmissionsTotal = fugitiveEmissions * gwp.fugitive / 1000;
+    const ch4EmissionsTotal = ch4Emissions * gwp.fe * gwp.ch4 / 1000;
     return fuelEmissions + fugitiveEmissionsTotal + ch4EmissionsTotal;
   }
 
   calculateScope2(electricityConsumption: number): number {
     const { electricity } = this.emissionFactors;
-    return electricityConsumption * electricity / 1_000;
+    return electricityConsumption * electricity / 1000;
   }
 
   calculateScope3(
-    transportDistance: number, transportDays: number,
+    transportDistance: number, boueCamionType: string, transportDays: number,
     chemicalQuantities: { chlorureFerrique: number, polymere: number, hypochloriteSodium: number, chlore: number },
+    chimicalData: {chimicalProduct: string, distance: number, days: number, camionType: string}[],
     commuteData: { people: number, distance: number, days: number, carType: string }[]
   ): number {
-    const { transport, chemicals, cars } = this.emissionFactors;
-    const fuelConsumptionTransport = transport.truck.dumper; // Assuming usage of camion à benne basculante
+    const { chemicals, cars, camions } = this.emissionFactors;
+    const fuelConsumptionTransport = camions[boueCamionType];
 
     let totalEmissions = 0;
 
-    totalEmissions += transportDistance * transportDays * fuelConsumptionTransport * transport.general / 1_000;
+    totalEmissions += transportDistance * transportDays * fuelConsumptionTransport.consumption * fuelConsumptionTransport.emissionFactor / 1000;
 
-    totalEmissions += chemicalQuantities.chlorureFerrique * chemicals.chlorureFerrique / 1_000_000;
-    totalEmissions += chemicalQuantities.polymere * chemicals.polymere / 1_000_000;
-    totalEmissions += chemicalQuantities.hypochloriteSodium * chemicals.hypochloriteSodium / 1_000_000;
-    totalEmissions += chemicalQuantities.chlore * chemicals.chlore / 1_000_000;
+    totalEmissions += chemicalQuantities.chlorureFerrique * chemicals.chlorureFerrique / 1000;
+    totalEmissions += chemicalQuantities.polymere * chemicals.polymere / 1000;
+    totalEmissions += chemicalQuantities.hypochloriteSodium * chemicals.hypochloriteSodium / 1000;
+    totalEmissions += chemicalQuantities.chlore * chemicals.chlore / 1000;
+
+    chimicalData.forEach(data => {
+      const camion = camions[data.camionType];
+      if (camion) {
+        totalEmissions += data.distance * data.days * camion.consumption * camion.emissionFactor / 1000;
+      }
+    });
 
     commuteData.forEach(data => {
       const car = cars[data.carType];
       if (car) {
-        totalEmissions += data.people * data.distance * data.days * car.consumption * car.emissionFactor / 1_000;
+        totalEmissions += data.people * data.distance * data.days * car.consumption * car.emissionFactor / 1000;
       }
     });
 

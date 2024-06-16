@@ -5,6 +5,11 @@
         <h3>Transport des boues</h3>
         <label>Distance journalière parcourue (km):</label>
         <input type="number" [(ngModel)]="transportDistance" name="transportDistance" required>
+        <label>Type de camion:</label>
+        <select [(ngModel)]="boueCamionType" name="commuteCamionType" required>
+          <option value="camionCiterne">Camion Citerne</option>
+          <option value="camionVenneBasculante">Camion à venne basculante</option>
+        </select>
         <label>Nombre de jours annuels de transport:</label>
         <input type="number" [(ngModel)]="transportDays" name="transportDays" required>
       </div>
@@ -19,6 +24,27 @@
         <input type="number" [(ngModel)]="hypochloriteSodium" name="hypochloriteSodium" required>
         <label>Quantité annuelle de chlore (kg):</label>
         <input type="number" [(ngModel)]="chlore" name="chlore" required>
+      </div>
+
+      <div>
+        <h3>Transport des produits chimiques</h3>
+        <label>Produit chimique :</label>
+        <select [(ngModel)]="chimicalProduct" name="chimicalProduct" required>
+          <option value="chlore">Chlore</option>
+          <option value="chlorureFerrique">Chlorure Ferrique</option>
+          <option value="hypochloriteSodium">Hypochlorite de Sodium</option>
+          <option value="polymère">Polymère</option>
+        </select>
+        <label>Distance journalière parcourue (km):</label>
+        <input type="number" [(ngModel)]="commuteChimicalDistance" name="commuteChimicalDistance" required>
+        <label>Nombre de jours annuels de déplacement:</label>
+        <input type="number" [(ngModel)]="commuteChimicalDays" name="commuteChimicalDays" required>
+        <label>Type de camion :</label>
+        <select [(ngModel)]="commuteCamionType" name="commuteCamionType" required>
+          <option value="camionCiterne">Camion Citerne</option>
+          <option value="camionVenneBasculante">Camion à venne basculante</option>
+        </select>
+        <button type="button" (click)="addChimicalProduct()">Ajouter transport domicile-travail</button>
       </div>
       
       <div>
