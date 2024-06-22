@@ -1,11 +1,15 @@
 <div class="scope2-form">
+    <br>
     <h2>Scope 2: Émissions liées à la consommation d'électricité</h2>
     <form (ngSubmit)="calculate()">
-        <div>
-        <label>Consommation annuelle d'électricité (kWh):</label>
-        <input type="number" [(ngModel)]="electricityConsumption" name="electricityConsumption" required>
-        </div>
-        <button type="submit">Calculer Scope 2</button>
+        <mat-form-field>
+            <mat-label>Consommation annuelle d'électricité</mat-label>
+            <input matInput type="number" [(ngModel)]="electricityConsumption" name="electricityConsumption" required>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-button color="success" type="submit">Calculer Scope 2</button>
     </form>
 </div>
   

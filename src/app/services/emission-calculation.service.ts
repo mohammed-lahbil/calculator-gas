@@ -19,15 +19,15 @@ export class EmissionCalculationService {
       ch4: 25
     },
     camions: {
-      camionVenneBasculante: { consumption: 34, emissionFactor: 2.518},
-      camionCiterne: { consumption: 33, emissionFactor: 2.518}
+      camionVenneBasculante: { consumption: 0.34, emissionFactor: 2.518},
+      camionCiterne: { consumption: 0.33, emissionFactor: 2.518}
     } as { [key: string]: { consumption: number; emissionFactor: number } },
     cars: {
-      daciaSandero: { consumption: 0.12, emissionFactor: 2.518 },
-      daciaLogan: { consumption: 0.13, emissionFactor: 2.518 },
-      renaultKangoo: { consumption: 0.14, emissionFactor: 2.518 },
-      peugeot208: { consumption: 0.11, emissionFactor: 2.518 },
-      renaultClio: { consumption: 0.10, emissionFactor: 2.518 }
+      daciaSandero: { consumption: 0.052, emissionFactor: 2.518 },
+      daciaLogan: { consumption: 0.038, emissionFactor: 2.518 },
+      renaultKangoo: { consumption: 0.0575, emissionFactor: 2.518 },
+      peugeot208: { consumption: 0.044, emissionFactor: 2.518 },
+      renaultClio: { consumption: 0.044, emissionFactor: 2.518 }
     } as { [key: string]: { consumption: number; emissionFactor: number } }
   };
 
@@ -59,10 +59,10 @@ export class EmissionCalculationService {
 
     totalEmissions += transportDistance * transportDays * fuelConsumptionTransport.consumption * fuelConsumptionTransport.emissionFactor / 1000;
 
-    totalEmissions += chemicalQuantities.chlorureFerrique * chemicals.chlorureFerrique / 1000;
-    totalEmissions += chemicalQuantities.polymere * chemicals.polymere / 1000;
-    totalEmissions += chemicalQuantities.hypochloriteSodium * chemicals.hypochloriteSodium / 1000;
-    totalEmissions += chemicalQuantities.chlore * chemicals.chlore / 1000;
+    totalEmissions += chemicalQuantities.chlorureFerrique * chemicals.chlorureFerrique / 1000000;
+    totalEmissions += chemicalQuantities.polymere * chemicals.polymere / 1000000;
+    totalEmissions += chemicalQuantities.hypochloriteSodium * chemicals.hypochloriteSodium / 1000000;
+    totalEmissions += chemicalQuantities.chlore * chemicals.chlore / 1000000;
 
     chimicalData.forEach(data => {
       const camion = camions[data.camionType];

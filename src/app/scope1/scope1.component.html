@@ -1,23 +1,29 @@
 <div class="scope1-form">
+    <br>
     <h2>Scope 1: Émissions directes</h2>
     <form (ngSubmit)="calculate()">
-        <div>
-        <label>Consommation annuelle de fioul (kWh):</label>
-        <input type="number" [(ngModel)]="fuelConsumption" name="fuelConsumption" required>
-        </div>
-        <!-- <div>
-        <label>Nombre de jours d'activité annuelle:</label>
-        <input type="number" [(ngModel)]="daysActive" name="daysActive" required>
-        </div> -->
-        <div>
-        <label>Émissions fugitives (kg):</label>
-        <input type="number" [(ngModel)]="fugitiveEmissions" name="fugitiveEmissions" required>
-        </div>
-        <div>
-        <label>Émissions de CH4 (kg):</label>
-        <input type="number" [(ngModel)]="ch4Emissions" name="ch4Emissions" required>
-        </div>
-        <button type="submit">Calculer Scope 1</button>
+        <mat-form-field>
+            <mat-label>Consommation de fioul</mat-label>
+            <input matInput type="number" [(ngModel)]="fuelConsumption" name="fuelConsumption" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+            <mat-label>Émissions fugitives</mat-label>
+            <input matInput type="number" [(ngModel)]="fugitiveEmissions" name="fugitiveEmissions" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+            <mat-label>Émissions de CH4</mat-label>
+            <input matInput type="number" [(ngModel)]="ch4Emissions" name="ch4Emissions" required>
+        </mat-form-field>
+
+        <br>
+        
+        <button mat-button type="submit">Calculer Scope 1</button>
     </form>
 </div>
   

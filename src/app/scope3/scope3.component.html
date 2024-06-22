@@ -1,72 +1,148 @@
 <div class="scope3-form">
+    <br>
     <h2>Scope 3: Émissions externes</h2>
     <form (ngSubmit)="calculate()">
       <div>
         <h3>Transport des boues</h3>
-        <label>Distance journalière parcourue (km):</label>
-        <input type="number" [(ngModel)]="transportDistance" name="transportDistance" required>
-        <label>Type de camion:</label>
-        <select [(ngModel)]="boueCamionType" name="commuteCamionType" required>
-          <option value="camionCiterne">Camion Citerne</option>
-          <option value="camionVenneBasculante">Camion à venne basculante</option>
-        </select>
-        <label>Nombre de jours annuels de transport:</label>
-        <input type="number" [(ngModel)]="transportDays" name="transportDays" required>
+
+        <mat-form-field>
+          <mat-label>Distance journalière parcourue</mat-label>
+          <input matInput type="number" [(ngModel)]="transportDistance" name="transportDistance" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Type de camion</mat-label>
+          <mat-select [(ngModel)]="boueCamionType" name="commuteCamionType" required>
+            <mat-option value="camionCiterne">Camion Citerne</mat-option>
+            <mat-option value="camionVenneBasculante">Camion à venne basculante</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <br>
+
+        <mat-form-field>
+          <mat-label>Nombre de jours annuels de transport</mat-label>
+          <input matInput type="number" [(ngModel)]="transportDays" name="transportDays" required>
+        </mat-form-field>
       </div>
       
       <div>
         <h3>Production de produits chimiques</h3>
-        <label>Quantité annuelle de chlorure ferrique (kg):</label>
-        <input type="number" [(ngModel)]="chlorureFerrique" name="chlorureFerrique" required>
-        <label>Quantité annuelle de polymère (kg):</label>
-        <input type="number" [(ngModel)]="polymere" name="polymere" required>
-        <label>Quantité annuelle d'hypochlorite de sodium (kg):</label>
-        <input type="number" [(ngModel)]="hypochloriteSodium" name="hypochloriteSodium" required>
-        <label>Quantité annuelle de chlore (kg):</label>
-        <input type="number" [(ngModel)]="chlore" name="chlore" required>
+        <mat-form-field>
+          <mat-label>Quantité annuelle de chlorure ferrique</mat-label>
+          <input matInput type="number" [(ngModel)]="chlorureFerrique" name="chlorureFerrique" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Quantité annuelle de polymère</mat-label>
+          <input matInput type="number" [(ngModel)]="polymere" name="polymere" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Quantité annuelle d'hypochlorite de sodium</mat-label>
+          <input matInput type="number" [(ngModel)]="hypochloriteSodium" name="hypochloriteSodium" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Quantité annuelle de chlore</mat-label>
+          <input matInput type="number" [(ngModel)]="chlore" name="chlore" required>
+        </mat-form-field>
       </div>
 
       <div>
         <h3>Transport des produits chimiques</h3>
-        <label>Produit chimique :</label>
-        <select [(ngModel)]="chimicalProduct" name="chimicalProduct" required>
-          <option value="chlore">Chlore</option>
-          <option value="chlorureFerrique">Chlorure Ferrique</option>
-          <option value="hypochloriteSodium">Hypochlorite de Sodium</option>
-          <option value="polymère">Polymère</option>
-        </select>
-        <label>Distance journalière parcourue (km):</label>
-        <input type="number" [(ngModel)]="commuteChimicalDistance" name="commuteChimicalDistance" required>
-        <label>Nombre de jours annuels de déplacement:</label>
-        <input type="number" [(ngModel)]="commuteChimicalDays" name="commuteChimicalDays" required>
-        <label>Type de camion :</label>
-        <select [(ngModel)]="commuteCamionType" name="commuteCamionType" required>
-          <option value="camionCiterne">Camion Citerne</option>
-          <option value="camionVenneBasculante">Camion à venne basculante</option>
-        </select>
-        <button type="button" (click)="addChimicalProduct()">Ajouter transport domicile-travail</button>
+        <mat-form-field>
+          <mat-label>Produit chimique</mat-label>
+          <mat-select [(ngModel)]="chimicalProduct" name="chimicalProduct" required>
+            <mat-option value="chlore">Chlore</mat-option>
+            <mat-option value="chlorureFerrique">Chlorure Ferrique</mat-option>
+            <mat-option value="hypochloriteSodium">Hypochlorite de Sodium</mat-option>
+            <mat-option value="polymère">Polymère</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Distance journalière parcourue</mat-label>
+          <input matInput type="number" [(ngModel)]="commuteChimicalDistance" name="commuteChimicalDistance" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Nombre de jours annuels de déplacement</mat-label>
+          <input matInput type="number" [(ngModel)]="commuteChimicalDays" name="commuteChimicalDays" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Type de camion</mat-label>
+          <mat-select [(ngModel)]="commuteCamionType" name="commuteCamionType" required>
+            <mat-option value="camionCiterne">Camion Citerne</mat-option>
+            <mat-option value="camionVenneBasculante">Camion à benne basculante</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-button type="button" (click)="addChimicalProduct()">Ajouter transport domicile-travail</button>
       </div>
       
+      <br>
+
       <div>
         <h3>Transport domicile-travail</h3>
-        <label>Nombre de personnes :</label>
-        <input type="number" [(ngModel)]="commutePeople" name="commutePeople" required>
-        <label>Distance journalière parcourue (km):</label>
-        <input type="number" [(ngModel)]="commuteDistance" name="commuteDistance" required>
-        <label>Nombre de jours annuels de déplacement:</label>
-        <input type="number" [(ngModel)]="commuteDays" name="commuteDays" required>
-        <label>Type de voiture :</label>
-        <select [(ngModel)]="commuteCarType" name="commuteCarType" required>
-          <option value="daciaSandero">Dacia Sandero</option>
-          <option value="daciaLogan">Dacia Logan</option>
-          <option value="renaultKangoo">Renault Kangoo</option>
-          <option value="peugeot208">Peugeot 208</option>
-          <option value="renaultClio">Renault Clio</option>
-        </select>
-        <button type="button" (click)="addCommuteData()">Ajouter transport domicile-travail</button>
+
+        <mat-form-field>
+          <mat-label>Nombre de personnes</mat-label>
+          <input matInput type="number" [(ngModel)]="commutePeople" name="commutePeople" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Distance journalière parcourue</mat-label>
+          <input matInput type="number" [(ngModel)]="commuteDistance" name="commuteDistance" required>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+          <mat-label>Nombre de jours annuels de déplacement</mat-label>
+          <input matInput type="number" [(ngModel)]="commuteDays" name="commuteDays" required>
+        </mat-form-field>
+        
+        <br>
+
+        <mat-form-field>
+          <mat-label>Type de voirtures</mat-label>
+          <mat-select [(ngModel)]="commuteCarType" name="commuteCarType" required>
+            <mat-option value="daciaSandero">Dacia Sandero</mat-option>
+            <mat-option value="daciaLogan">Dacia Logan</mat-option>
+            <mat-option value="renaultKangoo">Renault Kangoo</mat-option>
+            <mat-option value="peugeot208">Peugeot 208</mat-option>
+            <mat-option value="renaultClio">Renault Clio</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-button type="button" (click)="addCommuteData()">Ajouter transport domicile-travail</button>
       </div>
       
-      <button type="submit">Calculer Scope 3</button>
+      <br>
+
+      <button mat-button type="submit">Calculer Scope 3</button>
     </form>
 </div>
   
