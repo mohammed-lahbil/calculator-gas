@@ -19,7 +19,7 @@ export class EmissionCalculationService {
       ch4: 25
     },
     camions: {
-      camionVenneBasculante: { consumption: 0.34, emissionFactor: 2.518},
+      camionBenneBasculante: { consumption: 0.34, emissionFactor: 2.518},
       camionCiterne: { consumption: 0.33, emissionFactor: 2.518}
     } as { [key: string]: { consumption: number; emissionFactor: number } },
     cars: {
