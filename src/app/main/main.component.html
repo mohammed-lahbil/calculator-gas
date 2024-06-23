@@ -2,7 +2,7 @@
     <div class="container">
     
         <h1>Calculateur des Émissions de Gaz à Effet de Serre des Stations d'Épuration</h1>
-        
+
         <mat-tab-group class="forms">
             <mat-tab label="Scope 1">
                 <app-scope1 (scope1Calculated)="handleScope1Result($event)"></app-scope1>
@@ -23,5 +23,6 @@
         <p>Scope 2: {{scope2Result}} tonnes CO2e</p>
         <p>Scope 3: {{scope3Result}} tonnes CO2e</p>
         <p>Total: {{totalResult}} tonnes CO2e</p>
+        <app-emission-pie-chart [pieChart]="chartData" *ngIf="showChart"></app-emission-pie-chart>
     </div>
 </div>

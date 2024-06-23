@@ -14,6 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { EmissionPieChartComponent } from './emission-pie-chart/emission-pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     Scope1Component,
     Scope2Component,
     Scope3Component,
-    MainComponent
+    MainComponent,
+    EmissionPieChartComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxChartsModule
   ],
   providers: [EmissionCalculationService],
   bootstrap: [AppComponent]

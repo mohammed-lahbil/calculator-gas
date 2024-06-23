@@ -11,6 +11,8 @@ export class MainComponent {
   scope2Result: number = 0;
   scope3Result: number = 0;
   totalResult: number = 0;
+  chartData: any[] = [];
+  showChart = false;
 
   constructor(private emissionService: EmissionCalculationService) {}
 
@@ -31,5 +33,12 @@ export class MainComponent {
 
   calculateTotal() {
     this.totalResult = this.scope1Result + this.scope2Result + this.scope3Result;
+    this.chartData = [
+      { name: 'Scope 1', value: this.scope1Result },
+      { name: 'Scope 2', value: this.scope2Result },
+      { name: 'Scope 3', value: this.scope3Result }
+    ];
+
+    this.showChart = true;
   }
 }
