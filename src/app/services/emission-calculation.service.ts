@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { verticalChart } from 'src/data';
 
 @Injectable({
   providedIn: 'root'
@@ -36,14 +37,33 @@ export class EmissionCalculationService {
   calculateScope1(fuelConsumption: number, daysActive: number, fugitiveEmissions: number, ch4Emissions: number): number {
     const { fuel, gwp } = this.emissionFactors;
     const fuelEmissions = fuelConsumption * fuel / 1000;
+    verticalChart.push({
+      "name": "Consommation de fioul",
+      "value": fuelEmissions
+    })
     const fugitiveEmissionsTotal = fugitiveEmissions * gwp.fugitive / 1000;
+    verticalChart.push({
+      "name": "Emissions fugitives",
+      "value": fugitiveEmissionsTotal
+    })
     const ch4EmissionsTotal = ch4Emissions * gwp.fe * gwp.ch4 / 1000;
+    verticalChart.push({
+      "name": "Emission de CH4",
+      "value": ch4EmissionsTotal
+    })
     return fuelEmissions + fugitiveEmissionsTotal + ch4EmissionsTotal;
   }
 
   calculateScope2(electricityConsumption: number): number {
     const { electricity } = this.emissionFactors;
-    return electricityConsumption * electricity / 1000;
+    const result = electricityConsumption * electricity / 1000;
+    verticalChart.push({
+      "name": "Consommation annuelle d'électricité",
+      "value": result
+    })
+
+    console.log(verticalChart)
+    return result;
   }
 
   calculateScope3(
@@ -59,24 +79,55 @@ export class EmissionCalculationService {
 
     totalEmissions += transportDistance * transportDays * fuelConsumptionTransport.consumption * fuelConsumptionTransport.emissionFactor / 1000;
 
+    verticalChart.push({
+      "name": "Transport des boues",
+      "value": transportDistance * transportDays * fuelConsumptionTransport.consumption * fuelConsumptionTransport.emissionFactor / 1000
+    })
+
+    let chimicals = 0;
     totalEmissions += chemicalQuantities.chlorureFerrique * chemicals.chlorureFerrique / 1000000;
     totalEmissions += chemicalQuantities.polymere * chemicals.polymere / 1000000;
     totalEmissions += chemicalQuantities.hypochloriteSodium * chemicals.hypochloriteSodium / 1000000;
     totalEmissions += chemicalQuantities.chlore * chemicals.chlore / 1000000;
+    
+    chimicals += chemicalQuantities.chlorureFerrique * chemicals.chlorureFerrique / 1000000;
+    chimicals += chemicalQuantities.polymere * chemicals.polymere / 1000000;
+    chimicals += chemicalQuantities.hypochloriteSodium * chemicals.hypochloriteSodium / 1000000;
+    chimicals += chemicalQuantities.chlore * chemicals.chlore / 1000000;
 
+    verticalChart.push({
+      "name": "Production des produits chimiques",
+      "value": chimicals
+    })
+
+    let chemicalTransport = 0;
     chimicalData.forEach(data => {
       const camion = camions[data.camionType];
       if (camion) {
         totalEmissions += data.distance * data.days * camion.consumption * camion.emissionFactor / 1000;
+        chemicalTransport += data.distance * data.days * camion.consumption * camion.emissionFactor / 1000;
       }
     });
+
+    verticalChart.push({
+      "name": "Transport des produits chimiques",
+      "value": chemicalTransport
+    })
+
+    let transportation = 0;
 
     commuteData.forEach(data => {
       const car = cars[data.carType];
       if (car) {
         totalEmissions += data.people * data.distance * data.days * car.consumption * car.emissionFactor / 1000;
+        transportation += data.people * data.distance * data.days * car.consumption * car.emissionFactor / 1000;
       }
     });
+
+    verticalChart.push({
+      "name": "Transport domicile-travail",
+      "value": transportation
+    })
 
     return totalEmissions;
   }

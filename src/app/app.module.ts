@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { EmissionPieChartComponent } from './emission-pie-chart/emission-pie-chart.component';
+import { EmissionVerticalChartComponent } from './emission-vertical-chart/emission-vertical-chart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EmissionPieChartComponent } from './emission-pie-chart/emission-pie-cha
     Scope2Component,
     Scope3Component,
     MainComponent,
-    EmissionPieChartComponent
+    EmissionPieChartComponent,
+    EmissionVerticalChartComponent
   ],
   imports: [
     BrowserModule,

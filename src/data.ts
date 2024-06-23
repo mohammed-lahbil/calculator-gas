@@ -11,4 +11,6 @@ export var pie = [
         "name": "Scope 3",
         "value": 0,
     }
-]
+];
+
+export var verticalChart: any[] = [];
